@@ -1,0 +1,31 @@
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution 
+{
+	public static ArrayList<Integer> nextPermutation(ArrayList<Integer> permutation) 
+	{
+		int ind = -1; // break point
+        for (int i = permutation.size() - 2; i >= 0; i--) {
+            if (permutation.get(i) < permutation.get(i + 1)) {
+                ind = i;
+                break;
+            }
+        }
+		if(ind == -1){
+			Collections.reverse(permutation);
+			return permutation;
+		}
+		for(int j = permutation.size()-1; j > ind; j--){
+			if(permutation.get(j) > permutation.get(ind)){
+				Collections.swap(permutation, ind,j);
+				break;
+			}
+		}
+		List<Integer> sub = permutation.subList(ind+1, permutation.size());
+		Collections.reverse(sub);
+		return permutation;
+	}
+}
